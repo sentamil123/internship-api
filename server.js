@@ -2,7 +2,16 @@ const express = require("express");
 const { DatabaseSync } = require("node:sqlite");
 
 const app = express();
+
 app.use(express.json());
+
+// Health check
+app.get("/health", (req, res) => {
+  res.json({
+    status: "OK",
+    service: "Internship API"
+  });
+});
 
 // Secure headers
 app.use((req, res, next) => {
@@ -228,7 +237,7 @@ app.post("/applications", (req, res) => {
   });
 });
 
-// Health check
+// Root endpoint
 app.get("/", (req, res) => {
   res.json({
     message: "Internship API is running"
